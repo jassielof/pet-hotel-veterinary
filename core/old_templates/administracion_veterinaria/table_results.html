@@ -1,0 +1,32 @@
+<!-- administracion_veterinaria/templates/administracion_veterinaria/table_results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Results</title>
+</head>
+<body>
+
+<h2>Table Results</h2>
+{% if columns %}
+    <table>
+        <thead>
+            <tr>
+                <th>Column Name</th>
+                <th>Data Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for column in columns %}
+                <tr>
+                    <td>{{ column.column_name }}</td>
+                    <td>{{ column.data_type }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No columns found for the specified table.</p>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- administracion_veterinaria/templates/administracion_veterinaria/query_table.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Table</title>
+</head>
+<body>
+
+<h2>Query Table</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
