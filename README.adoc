@@ -1,6 +1,7 @@
 = Proyecto Final para Base de Datos: Grupo 2 -- Veterinaria
 Jassiel Ovando Franco <a2021117600@estudiantes.upsa.edu.bo>
 :toc: auto
+:toc-title: Conteniod
 :doctype: book
 :source-highlighter: highlightjs
 
@@ -71,12 +72,19 @@ Entonces:
 . Registro de huéspedes
 . Reporte de huéspedes en periodo de fechas
 
-.Registro de huésped
+===== Registro de huésped
 Para esta función se debe poder registrar a un huésped, por lo tanto depende de poder registrar a una mascota, cliente, encargado y persona.
 Luego, se puede registrar al huésped como una estadía, que a su vez, depende de poder registrar las habitaciones, servicios y requerimientos.
 Lo que no viene a considerarse son los historiales.
 
-.Reporte de huéspedes en periodo de fechas
+.Cobranzas
+[source,python]
+----
+include::scripts/cobranza.py[]
+----
+
+
+===== Reporte de huéspedes en periodo de fechas
 Para el reporte debe haber una entrada con dos parámetros, fecha de inicio y fecha de final, la salida debe ser la lista de todos los huéspedes que tengan su fecha de inicio mayor o igual a la fecha de inicio de entrada, y su fecha de salida mayor a la fecha de registro de entrada.
 Caso contrario, no se lo toma en cuenta.
 
@@ -98,20 +106,10 @@ La salida debería ser
 
 Todas las demás no se consideran porque no entran dentro del rango:
 
-.Representación en Python3
-[python]
+.Reporte de huéspedes en periodo de fechas
+[source,python]
 ----
-entrada_reporte = [1/1/2021, 10/1/2021]
-fechas = [
-    [1/1/2021, 10/1/2021],
-    [5/1/2021, 15/1/2021],
-    [20/1/2021, 30/1/2021],
-    [25/12/2020, 5/1/2020],
-    [20/12/2020, 30/12/2020],
-]
-
-for fecha in fechas:
-    if (fecha[0] >)
+include::scripts/reporte-por-periodo.py[]
 ----
 
 Tal cual se ve, se aprecia como se considera a un huésped, luego para el reporte se debe considerar a todos los huéspedes que cumplan con la condición.
@@ -121,20 +119,20 @@ Además de agregar un mensaje extra que mencione si el huésped está actualment
 
 === Base (por profesor)
 
-image::doc/img/0-base.png[]
+image::docs/assets/images/0-base.png[]
 
 === Modelo Conceptual
 
 [plantuml]
 ----
-include::assets/1-conceptual.pu[]
+include::docs/assets/erd/conceptual.pu[]
 ----
 
 === Modelo Lógico
 
 [plantuml]
 ----
-include::assets/2-logico.pu[]
+include::docs/assets/erd/logical.pu[]
 ----
 
 === Modelo Físico
@@ -143,7 +141,7 @@ include::assets/2-logico.pu[]
 
 [plantuml]
 ----
-include::assets/3-fisico.pu[]
+include::docs/assets/erd/physical.pu[]
 ----
 
 ==== DBeaver
