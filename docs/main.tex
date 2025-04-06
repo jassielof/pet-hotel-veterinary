@@ -32,7 +32,7 @@
 }
 
 \graphicspath{
-  {../img/}
+  {assets}
 }
 
 \lstdefinestyle{sqlstyle}{
@@ -75,27 +75,27 @@
   \begin{center}
     \includegraphics[width=0.5\textwidth]{logo-upsa.png}
     \vspace*{\fill}
-    
+
     \textsc{\Large{Universidad Privada de Santa Cruz de la Sierra}}\\
     \textsc{\Large{Facultad de Ingeniería}}
     \vspace*{\fill}
-    
+
     \large{\textbf{Estudiante y Número de Registro:}}\\
     Jassiel Ovando Franco --- 2021117600
     \vspace*{\fill}
-    
+
     \large{\textbf{Materia:}}\\
     Base de Datos --- SI~314
     \vspace*{\fill}
-    
+
     \large{\textbf{Docente:}}\\
     Carlos Wilfredo Egüez Terrazas
     \vspace*{\fill}
-    
+
     \large{\textbf{Proyecto:}}\\
     Grupo 2: Veterinaria
     \vspace*{\fill}
-    
+
     \large{\textbf{Fecha:}}\\
     Viernes, 8 de diciembre, 2023
   \end{center}
@@ -335,7 +335,7 @@ Fuera de los códigos de cliente y mascotas, se tienen por ejemplo los códigos 
   breaklines=true,
   % firstline=1,
   % lastline=10
-]{../src/ddl.sql}
+]{../sql/ddl.sql}
 
 \pagebreak
 \subsection{Aplicación}
@@ -346,14 +346,14 @@ Fuera de los códigos de cliente y mascotas, se tienen por ejemplo los códigos 
 \lstinputlisting[style=pythonstyle,
   breaklines=true,
   caption={Cobranza de huéspedes hecho en Python3.}
-]{../src/cobranza.py}
+]{../scripts/cobranza.py}
 
 \subsubsection{Reporte de Huéspedes entre 2 Fechas}
 
 \lstinputlisting[style=pythonstyle,
   caption={Reporte de huéspedes entre 2 fechas hecho en Python3.}
   breaklines=true,
-]{../src/reporte-por-periodo.py}
+]{../scripts/reporte-por-periodo.py}
 
 \pagebreak
 \appendix
@@ -446,7 +446,7 @@ Debido a que son 12 tablas, poner, todas las interfaces que existen, resulta en 
   \includegraphics[width=\textwidth]{django-requisitos.add.png}
   \caption{Agregar dos requerimientos a una estadía}
 \end{figure}
-  
+
 \pagebreak
 \section{cobranza.py}
 
@@ -483,6 +483,6 @@ Debido a que son 12 tablas, poner, todas las interfaces que existen, resulta en 
 \lstinputlisting[style=pythonstyle,
   caption={modelos para CRUD en django, en base a la base de datos.}
   breaklines=true,
-]{../src/models.py}
+]{../core/models.py}
 
 \end{document}
