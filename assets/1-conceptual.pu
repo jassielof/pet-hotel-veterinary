@@ -1,0 +1,38 @@
+@startuml veterinaria_modelo_conceptual
+' left to right direction
+' !theme spacelab
+skinparam linetype ortho
+
+title Modelo Conceptual de la Gestión de la Veterinaria y Hotel de Mascotas
+
+entity "Persona (conjunto de la familia)" as persona
+entity "Cliente (familia)" as cliente
+entity "Mascota (pacientes)" as mascota
+entity "Historial de Peso" as historial_peso
+entity "Historial Médico" as historial_medico
+entity "Vacunas (historial)" as vacunas
+
+persona }|-left-|| cliente
+cliente ||-left-|{ mascota
+mascota ||-up-|{ historial_peso
+mascota ||-left-|{ historial_medico
+mascota ||-down-o{ vacunas
+
+' Ampliación: Servicio de hotel de mascota
+
+entity "Huésped (mascota paciente o no)" as huesped
+entity "Necesidades (servicios)" as necesidades
+entity "Necesidades Alimenticias" as necesidades_alimenticias
+entity "Necesidades Médicas" as necesidades_medicas
+entity "Cuidados Particulares" as cuidados_particulares
+entity "Necesidades Especiales (extras)" as necesidades_especiales
+
+
+mascota ||--|| huesped
+huesped ||--|{ necesidades
+necesidades ||--o{ necesidades_alimenticias
+necesidades ||--o{ necesidades_medicas
+necesidades ||--o{ cuidados_particulares
+necesidades ||--o{ necesidades_especiales
+
+@enduml

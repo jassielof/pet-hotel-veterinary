@@ -1,0 +1,170 @@
+@startuml veterinaria_modelo_fisico
+' left to right direction
+' !theme spacelab
+' skinparam linetype ortho
+
+title Modelo Físico de la Gestión de la Veterinaria y Hotel de Mascotas
+
+' Principales. '
+entity "Persona (de la familia)" as persona {
+  Código Persona : text
+  ==
+  * Nombre Persona : text
+  Relación : text
+  Teléfono Persona : text
+}
+entity "Cliente (familia)" as cliente {
+  Código Cliente : serial
+  ==
+  * Apellido Paterno : text
+  * Cuenta Bancaria : text
+  * Dirección : text
+  * Teléfono : text
+}
+entity "Encargado" as encargado #line.dashed {
+  Código Cliente : serial
+  Código Persona : text
+  ==
+  --
+  * **Código Cliente** : serial
+  * **Código Persona** : text
+}
+note top: "El encargado es quien llevó a la mascota o quien pagó."
+entity "Mascota (pacientes)" as mascota {
+  Código Mascota : serial
+  ==
+  Alias : text
+  * Especia: text
+  Raza : text
+  Edad (Meses) : real
+  Fecha Nacimiento : date
+  * Sexo : text
+  * Peso Actual (Kg) : real
+  --
+  * **Código Cliente** : serial
+}
+note left of mascota
+  "Para los historiales el
+  límite viene a ser 10 por mascota."
+end note
+
+' Historiales dependientes de la mascota. '
+entity "Historial de Peso" as historial_peso #line.dashed {
+  Fecha Registro : date
+  Código Mascota : serial
+  ==
+  * Peso (Kg) : real
+  --
+  * **Código Mascota** : serial
+}
+note bottom of historial_peso
+  "El historial de peso no se
+  genera hasta que la mascota
+  visite más de una vez."
+end note
+entity "Historial Médico" as historial_medico #line.dashed {
+  Fecha Consulta : date
+  Código Mascota : serial
+  ==
+  * Enfermedad : text
+  * Detalle Diagnóstico : text
+  Fecha Enfermedad : date
+  Detalle Tratamiento : text
+  --
+  * **Código Mascota** : serial
+}
+note bottom of historial_medico
+  "Fecha Enfermedad:
+  Fecha en que se
+  detectó la enfermedad."
+end note
+entity "Calendario de Vacunas" as calendario_vacunas #line.dashed {
+  Fecha Vacunación : date
+  Código Mascota : serial
+  Tipo : text
+  Fabricante : text
+  ==
+  --
+  * **Código Mascota** : serial
+  * **Tipo** : text
+  * **Fabricante** : text
+}
+entity "Vacuna" as vacunas {
+  Tipo : text
+  Fabricante : text
+  ==
+  * Precio (BOB) : money
+}
+
+' Relaciones.'
+persona ||-left-|{ encargado : "Es"
+encargado }|-down-|| cliente : "Tiene"
+cliente ||.left.|{ mascota : "Tiene"
+
+mascota ||-down-o{ historial_peso : "Tiene"
+mascota ||-down-o{ historial_medico : "Tiene"
+mascota ||-down-o{ calendario_vacunas : "Tiene"
+calendario_vacunas }|-down-|| vacunas : "Registra"
+
+
+' Ampliación: Servicio de hotel de mascota. '
+' Principales. '
+entity "Huésped (mascota)" as huesped #line.dashed {
+  * **Fecha Registro** : date
+  * **Código Mascota** : serial
+  ==
+  --
+  * **Fecha Registro** : date
+  * **Código Mascota** : serial
+}
+entity "Estadía" as estadia #line.dashed {
+  Fecha Registro (Ingreso/Inicio) : date
+  Código Mascota : serial
+  Código Habitación : int
+  ==
+  * Observaciones : text
+  * Días Estadía : real
+  * Fecha Fín : date
+  * Precio Total (BOB) : money
+  --
+  * **Código Habitación** : int
+  * **Código Mascota** : serial
+}
+
+' De servicio. '
+entity "Habitación" as habitacion {
+  Código Habitación : int
+  ==
+  * Precio (BOB) : money
+  * Capacidad : int
+  * Tipo : text
+  * Estado : bool
+}
+entity "Requerimiento" as requerimientos #line.dashed {
+  Código Servicio : int
+  Fecha Registro : date
+  Código Mascota : serial
+  Código Habitación : int
+  ==
+  Cantidad : int
+  --
+  * **Código Mascota** : serial
+  * **Código Habitación** : int
+  * **Fecha Registro** : date
+  * **Código Servicio** : int
+}
+entity "Servicio" as servicios {
+  Código Servicio : serial
+  ==
+  * Tipo Servicio : text
+  * Precio (BOB) : money
+}
+
+' Relaciones. '
+mascota ||-up-o| huesped : "Puede ser"
+huesped ||-up-o{ estadia : "Puede tener"
+estadia }|-up-|| habitacion : "Se asigna"
+estadia ||-left-o{ requerimientos : "Puede tener"
+requerimientos }o-up-|| servicios : "Genera"
+
+@enduml

@@ -1,0 +1,14 @@
+[project]
+name = "pet-hotel-veterinary"
+version = "0.1.0"
+description = "A Django application for managing a pet hotel and veterinary clinic."
+readme = "README.adoc"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2",
+    "django-cors-headers>=4.7.0",
+    "django-money>=3.5.3",
+    "django-phonenumber-field>=8.0.0",
+    "django-rest-framework>=0.1.0",
+    "phonenumbers>=9.0.2",
+]

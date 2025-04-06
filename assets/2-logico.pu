@@ -1,0 +1,107 @@
+@startuml veterinaria_modelo_logico
+' left to right direction
+' !theme spacelab
+' skinparam linetype ortho
+
+title Modelo Lógico de la Gestión de la Veterinaria y Hotel de Mascotas
+
+' Principales. '
+entity "Persona (de la familia)" as persona {
+  Código Persona : int
+  * Nombre : text
+  * Apellido Paterno : text
+}
+entity "Cliente (familia)" as cliente {
+  Código Cliente : int
+  * Apellido Paterno : text
+  * Cuenta Bancaria : text
+  * Dirección : text
+  * Teléfono : text
+}
+entity "Encargado" as encargado #line.dashed
+note top: "El encargado es quien llevó a la mascota o quien pagó."
+entity "Mascota (pacientes)" as mascota {
+  Código Mascota : int
+  Alias : text
+  * Especia: text
+  Raza : text
+  * Peso Actual (Kg) : real
+}
+note left: "Para los historiales el límite viene a ser 10 por mascota."
+note right of mascota::"Paciente Veterinaria : bool"
+  "Indica si la mascota es
+  paciente de la veterinaria
+  o no"
+end note
+
+' Historiales dependientes de la mascota. '
+entity "Historial de Peso" as historial_peso #line.dashed {
+  Fecha Registro : date
+  Peso (Kg) : real
+}
+entity "Historial Médico" as historial_medico #line.dashed {
+  Fecha Consulta : date
+  * Enfermedad : text
+  * Diagnóstico : text
+  Fecha Enfermedad : date
+}
+note bottom: "Para la fecha de enfermedad\nse supone que\nla mascota se enfermó,\npor lo que si no se sabe,\npuede ser nula."
+entity "Calendario de Vacunas" as calendario_vacunas #line.dashed {
+  Fecha Vacunación : date
+}
+note left of calendario_vacunas::Enfermedad
+  "Nombre de la vacuna
+  o bien la enfermedad
+  contra la que se está
+  vacunando."
+end note
+entity "Vacunas" as vacunas {
+  Tipo : text
+  Fabricante : text
+  Precio : money
+}
+
+' Relaciones.'
+persona ||-left-|{ encargado : "Es"
+encargado }|-down-|| cliente : "Tiene"
+cliente ||.left.|{ mascota : "Tiene"
+
+mascota ||-down-|{ historial_peso : "Tiene"
+mascota ||-down-o{ historial_medico : "Tiene"
+mascota ||-down-o{ calendario_vacunas : "Tiene"
+calendario_vacunas }|-down-|| vacunas : "Registra"
+
+
+' Ampliación: Servicio de hotel de mascota. '
+' Principales. '
+entity "Estadia" as estadia #line.dashed {
+  Fecha Registro : date
+  * Tiempo Estadía : int
+  * Fecha Fín : date
+}
+
+' De servicio. '
+entity "Habitación" as habitacion {
+  Código Habitación : int
+  * Precio : money
+  * Capacidad : int
+  * Tipo : text
+  * Estado : bool
+}
+entity "Requerimientos" as requerimientos #line.dashed {
+  Fecha Registro : date
+  Cantidad : int
+}
+entity "Servicios" as servicios {
+  Código Servicio : int
+  * Tipo Servicio : text
+  * Precio : money
+}
+
+' Relaciones. '
+mascota ||-up-o{ estadia : "Puede tener"
+estadia }|-up-|| habitacion : "Se asigna"
+estadia ||-left-o{ requerimientos : "Puede tener"
+requerimientos }o-up-|| servicios : "Genera"
+
+@enduml
