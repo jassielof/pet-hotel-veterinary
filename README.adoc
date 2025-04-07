@@ -1,5 +1,5 @@
 = Proyecto Final para Base de Datos: Grupo 2 -- Veterinaria
-Jassiel Ovando Franco <a2021117600@estudiantes.upsa.edu.bo>
+Jassiel O._F. <a2021117600@estudiantes.upsa.edu.bo>
 :toc: auto
 :toc-title: Conteniod
 :doctype: book
@@ -11,9 +11,9 @@ Para el proyecto final se contempla la elaboración del mismo como una ampliaci�
 
 .Etapas calificadas:
 . (15 %) Modelo lógico completo.
-. (15 %) *Implementación:* Creación de las tablas de bases de datos, o su modificación (_SQL-DDL_), _se puede incluir inserción de datos (SQL-DML) y posibles consultas (SQL-DQL)_.
+. (15 %) *Implementación:* Creación de las tablas de bases de datos, o su modificación _(SQL-DDL)_, _se puede incluir inserción de datos (SQL-DML) y posibles consultas (SQL-DQL)._
 . (30 %) *Actividades del negocio:* Procedimientos almacenados para realizarlas (descritas en el problema), aplicando conceptos de transacción, y contemplando los parámetros necesarios en los procedimientos, _incluyendo un parámetro de salida que indique el resultado de la operación (RETURNS)_.
-. (15 %) *Reportes:* Procedimientos almacenados (_SQL_) para generar los datos en forma de reporte.
+. (15 %) *Reportes:* Procedimientos almacenados _(SQL)_ para generar los datos en forma de reporte.
 . (25 %) *Programa:* Capa de negocio que realice la invocación de los procedimientos almacenados, y presente los resultados. _Es posible invocar los procedimientos de creación o alteración de las tablas en la base de datos, además de crear un menú simple para distintas operaciones_.
 
 == Estructura del Documento

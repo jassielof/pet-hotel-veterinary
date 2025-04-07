@@ -5,6 +5,7 @@
 
 title Modelo Físico de la Gestión de la Veterinaria y Hotel de Mascotas
 
+
 ' Principales. '
 entity "Persona (de la familia)" as persona {
   Código Persona : text
